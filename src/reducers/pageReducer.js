@@ -1,6 +1,6 @@
 import { CHANGE_PAGE } from '../actions/types';
 
-const initialState = 'Calendar';
+const initialState = 'Cooks';
 
 export default (state = initialState, action) => {
   switch(action.type) {
