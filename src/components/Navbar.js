@@ -5,19 +5,16 @@ import { changePage } from '../actions/pageActions';
 function Navbar(props) {
   const { curPage } = props;
 
-  const onSelect = (e) => {
-    props.changePage(e.target.value);
+  const onClickButton = (e) => {
+    props.changePage(e.target.innerHTML);
   };
 
   return (
-    <div>
-      <select name="pages" onChange={onSelect}>
-        <option value="calendar">Calendar</option>
-        <option value="cooks">Cooks</option>
-        <option value="planner">Planner</option>
-      </select>
-      {curPage}
-    </div>
+    <nav>
+      <button onClick={onClickButton}>Calendar</button>
+      <button onClick={onClickButton}>Cooks</button>
+      <button onClick={onClickButton}>Planner</button>
+    </nav>
   )
 };
 
