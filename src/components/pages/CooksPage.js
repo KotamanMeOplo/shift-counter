@@ -56,9 +56,9 @@ function CooksPage(props) {
         <input name="name" value={cookName} onChange={e => setCookName(e.target.value)} />
         <label>Times: </label>
         <input name="times" type="number" value={cookTimes} onChange={e => setCookTimes(e.target.value)} />
-        <button type="submit">Submit</button>
         <label>Color:</label>
         <input name="color" type="color" onChange={e => setCookColor(e.target.value)} />
+        <button type="submit">Submit</button>
       </form>
 
       {

@@ -48,3 +48,7 @@ nav > button:hover {
 .cook-block > * {
   margin: 0 1rem;
 }
+
+table {
+  font-size: 2rem;
+}
