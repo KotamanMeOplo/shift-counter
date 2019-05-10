@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import Calendar from '../Calendar';
 
-function CalendarPage() {
+function CalendarPage(props) {
+  const { cooks } = props;
+
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   const now = new Date();
 
@@ -34,8 +37,20 @@ function CalendarPage() {
       <button onClick={_ => onArrowClick(1)}>&gt;</button>
       </div>
       <Calendar month={month} year={year} />
+
+      {
+        cooks.map(cook => 
+          <div>
+            <h3><div className="cook-color" style={{backgroundColor: cook.color}} />: {cook.name} => {cook.initialTimes + cook.additionalTimes}</h3>
+          </div>
+        )
+      }
     </div>
   )
 }
 
-export default CalendarPage;
+const mapStateToProps = state => ({
+  cooks: state.cooks
+});
+
+export default connect(mapStateToProps, null)(CalendarPage);

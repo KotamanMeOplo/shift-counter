@@ -7,16 +7,18 @@ function CooksPage(props) {
 
   const [cookName, setCookName] = useState('');
   const [cookTimes, setCookTimes] = useState(0);
+  const [cookColor, setCookColor] = useState('#000');
 
   const getAllCooks = () => JSON.parse(localStorage.getItem('cooks')) || [];
 
   const onSubmit = e => {
     e.preventDefault();
-
+    
     const newCook = {
       name: cookName,
-      initialTimes: cookTimes,
-      additionalTimes: 0
+      initialTimes: parseInt(cookTimes),
+      additionalTimes: 0,
+      color: cookColor
     };
 
     // Update local storage
@@ -40,6 +42,7 @@ function CooksPage(props) {
   const onEditCook = cook => {
     setCookName(cook.name);
     setCookTimes(cook.initialTimes);
+    setCookColor(cook.color);
 
     onDeleteCook(cook);
   }
@@ -54,12 +57,15 @@ function CooksPage(props) {
         <label>Times: </label>
         <input name="times" type="number" value={cookTimes} onChange={e => setCookTimes(e.target.value)} />
         <button type="submit">Submit</button>
+        <label>Color:</label>
+        <input name="color" type="color" onChange={e => setCookColor(e.target.value)} />
       </form>
 
       {
         cooks.map((a, i) => 
-          <div key={i}>
-            <h3>{a.name}: {a.initialTimes}</h3>
+          <div key={i} className="cook-block">
+            <h3 className="cook-info">{a.name}: {a.initialTimes}</h3>
+            <div className="cook-color" style={{backgroundColor: a.color}} />
             <button onClick={_ => onDeleteCook(a)}>Delete</button>
             <button onClick={_ => onEditCook(a)}>Edit</button>
           </div>

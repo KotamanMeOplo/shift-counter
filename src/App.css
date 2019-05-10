@@ -29,3 +29,22 @@ nav > button:hover {
 #content {
   margin-top: 3.5rem;
 }
+
+.cook-color {
+  height: 1.5rem;
+  width: 1.5rem;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.cook-info {
+  display: inline-block;
+}
+
+.cook-block {
+  padding: .5rem;
+}
+
+.cook-block > * {
+  margin: 0 1rem;
+}
