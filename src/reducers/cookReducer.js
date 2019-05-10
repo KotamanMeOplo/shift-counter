@@ -7,7 +7,7 @@ export default (state = initialState, action) => {
     case ADD_COOK:
       return [...state, action.payload];
     case DELETE_COOK:
-      return state.filter(cook => cook !== action.payload);
+      return state.filter(cook => cook.name !== action.payload.name);
     default:
       return state;
   }

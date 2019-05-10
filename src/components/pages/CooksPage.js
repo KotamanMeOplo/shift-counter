@@ -13,7 +13,8 @@ function CooksPage(props) {
 
     const newCook = {
       name: cookName,
-      initialTimes: cookTimes
+      initialTimes: cookTimes,
+      additionalTimes: 0
     };
 
     props.addCook(newCook);
