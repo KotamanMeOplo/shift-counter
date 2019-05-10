@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { addCook } from '../../actions/cookActions';
+import { addCook, deleteCook } from '../../actions/cookActions';
 
 function CooksPage(props) {
   const { cooks } = props;
@@ -32,8 +32,11 @@ function CooksPage(props) {
       </form>
 
       {
-        cooks.map(a => 
-          <h3>{a.name}: {a.initialTimes}</h3>
+        cooks.map((a, i) => 
+          <div key={i}>
+            <h3>{a.name}: {a.initialTimes}</h3>
+            <button onClick={_ => props.deleteCook(a)}>Delete</button>
+          </div>
         )
       }
     </div>
@@ -44,4 +47,4 @@ const mapStateToProps = state => ({
   cooks: state.cooks
 });
 
-export default connect(mapStateToProps, { addCook })(CooksPage);
+export default connect(mapStateToProps, { addCook, deleteCook })(CooksPage);
