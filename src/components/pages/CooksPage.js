@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchCooks } from '../../actions/cookActions';
 
 function CooksPage(props) {
-  const { cooks } = props;
+  const { cooks, fetchCooks } = props;
 
   const [cookName, setCookName] = useState('');
   const [cookTimes, setCookTimes] = useState(0);
@@ -24,7 +24,7 @@ function CooksPage(props) {
     allCooks.push(newCook);
     localStorage.cooks = JSON.stringify(allCooks);
 
-    props.fetchCooks();
+    fetchCooks();
     setCookName('');
     setCookTimes(0);
   }
@@ -34,7 +34,7 @@ function CooksPage(props) {
     allCooks = allCooks.filter(a => a.name !== cook.name);
     localStorage.cooks = JSON.stringify(allCooks);
 
-    props.fetchCooks();
+    fetchCooks();
   }
 
   const onEditCook = cook => {

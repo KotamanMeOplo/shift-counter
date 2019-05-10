@@ -1,6 +1,6 @@
 import { FETCH_COOKS } from '../actions/types';
 
-const initialState = [];
+const initialState = JSON.parse(localStorage.getItem('cooks'));
 
 export default (state = initialState, action) => {
   switch(action.type) {
