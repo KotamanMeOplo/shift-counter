@@ -7,6 +7,7 @@ function CooksPage(props) {
 
   const [cookName, setCookName] = useState('');
   const [cookTimes, setCookTimes] = useState(0);
+  const [cookAdditionalTimes, setAdditionalTimes] = useState([]);
   const [cookColor, setCookColor] = useState('#000');
 
   const getAllCooks = () => JSON.parse(localStorage.getItem('cooks')) || [];
@@ -17,7 +18,7 @@ function CooksPage(props) {
     const newCook = {
       name: cookName,
       initialTimes: parseInt(cookTimes),
-      additionalTimes: 0,
+      additionalTimes: cookAdditionalTimes,
       color: cookColor
     };
 
@@ -42,6 +43,7 @@ function CooksPage(props) {
   const onEditCook = cook => {
     setCookName(cook.name);
     setCookTimes(cook.initialTimes);
+    setAdditionalTimes(cook.additionalTimes);
     setCookColor(cook.color);
 
     onDeleteCook(cook);
