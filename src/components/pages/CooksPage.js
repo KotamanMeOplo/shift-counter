@@ -17,6 +17,15 @@ function CooksPage(props) {
     };
 
     props.addCook(newCook);
+    setCookName('');
+    setCookTimes(0);
+  }
+
+  const onEditCook = cook => {
+    setCookName(cook.name);
+    setCookTimes(cook.initialTimes);
+
+    props.deleteCook(cook);
   }
 
   return (
@@ -36,6 +45,7 @@ function CooksPage(props) {
           <div key={i}>
             <h3>{a.name}: {a.initialTimes}</h3>
             <button onClick={_ => props.deleteCook(a)}>Delete</button>
+            <button onClick={_ => onEditCook(a)}>Edit</button>
           </div>
         )
       }
