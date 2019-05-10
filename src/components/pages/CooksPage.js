@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { addCook, deleteCook } from '../../actions/cookActions';
+import { fetchCooks } from '../../actions/cookActions';
 
 function CooksPage(props) {
   const { cooks } = props;
 
   const [cookName, setCookName] = useState('');
   const [cookTimes, setCookTimes] = useState(0);
+
+  const getAllCooks = () => JSON.parse(localStorage.getItem('cooks')) || [];
 
   const onSubmit = e => {
     e.preventDefault();
@@ -17,16 +19,29 @@ function CooksPage(props) {
       additionalTimes: 0
     };
 
-    props.addCook(newCook);
+    // Update local storage
+    const allCooks = getAllCooks();
+    allCooks.push(newCook);
+    localStorage.cooks = JSON.stringify(allCooks);
+
+    props.fetchCooks();
     setCookName('');
     setCookTimes(0);
+  }
+
+  const onDeleteCook = cook => {
+    let allCooks = getAllCooks();
+    allCooks = allCooks.filter(a => a.name !== cook.name);
+    localStorage.cooks = JSON.stringify(allCooks);
+
+    props.fetchCooks();
   }
 
   const onEditCook = cook => {
     setCookName(cook.name);
     setCookTimes(cook.initialTimes);
 
-    props.deleteCook(cook);
+    onDeleteCook(cook);
   }
 
   return (
@@ -45,7 +60,7 @@ function CooksPage(props) {
         cooks.map((a, i) => 
           <div key={i}>
             <h3>{a.name}: {a.initialTimes}</h3>
-            <button onClick={_ => props.deleteCook(a)}>Delete</button>
+            <button onClick={_ => onDeleteCook(a)}>Delete</button>
             <button onClick={_ => onEditCook(a)}>Edit</button>
           </div>
         )
@@ -58,4 +73,4 @@ const mapStateToProps = state => ({
   cooks: state.cooks
 });
 
-export default connect(mapStateToProps, { addCook, deleteCook })(CooksPage);
+export default connect(mapStateToProps, { fetchCooks })(CooksPage);

@@ -1,15 +1,10 @@
-import { ADD_COOK, DELETE_COOK } from './types';
+import { FETCH_COOKS } from './types';
 
-export const addCook = cook => dispatch => {
-  dispatch({
-    type: ADD_COOK,
-    payload: cook
-  });
-}
+export const fetchCooks = () => dispatch => {
+  const cooks = JSON.parse(localStorage.getItem('cooks')) || [];
 
-export const deleteCook = cook => dispatch => {
   dispatch({
-    type: DELETE_COOK,
-    payload: cook
+    type: FETCH_COOKS,
+    payload: cooks
   });
 }
