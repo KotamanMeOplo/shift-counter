@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 const getTable = cooks => cooks.map(cook => [cook, true, true, true, true, true, true, true]);
 
 // Find days where only one cook's available and assign him to said day
-const getResults = table => {
-  const results = ['', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a'];
-  
+const getResults = (table, changedDay = -1, def = ['', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a']) => {  
   const cooksPerDay = table.reduce((pr, cur) => {
     for(let i = 1; i <= 7; i ++) {
       if(cur[i]) {
@@ -17,9 +15,12 @@ const getResults = table => {
     return pr;
   }, [[], [], [], [], [], [], []]);
   
+  const results = def;
   cooksPerDay.forEach((a, i) => {
     if(a.length === 1) {
       results[i + 1] = a[0];
+    } else if(i === changedDay - 1) {
+      results[i + 1] = 'n/a';
     }
   });
 
@@ -37,7 +38,15 @@ function PlannerPage(props) {
     const tableCopy = [...table];
     tableCopy[i][j] = !tableCopy[i][j];
     setTable(tableCopy);
-    setResults(getResults(table));
+    setResults(getResults(table, j, results));
+  }
+
+  const chingeRes = _ => {
+    const arr = [];
+    for(let i = 0; i < 7; i ++) {
+      arr.push(i);
+    }
+    setResults(arr);
   }
 
   return (
@@ -79,7 +88,7 @@ function PlannerPage(props) {
           {
             results.map((a, i) => 
               <td key={i}>
-                <button style={{backgroundColor: a.color || 'transparent'}}>{a.name ? a.name[0] : a}</button>
+                <button style={{backgroundColor: a.color || 'transparent'}} onClick={chingeRes}>{a.name ? a.name[0] : a}</button>
               </td>
             )
           }
