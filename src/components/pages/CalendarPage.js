@@ -40,7 +40,7 @@ function CalendarPage(props) {
 
       {
         cooks.map(cook => 
-          <div>
+          <div key={cook.name}>
             <h3><div className="cook-color" style={{backgroundColor: cook.color}} />: {cook.name} => {cook.initialTimes + cook.additionalTimes.length}</h3>
           </div>
         )

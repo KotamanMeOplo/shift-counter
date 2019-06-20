@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { changePage } from '../actions/pageActions';
 
 function Navbar(props) {
-  const { curPage } = props;
-
   const onClickButton = (e) => {
     props.changePage(e.target.innerHTML);
   };
@@ -18,8 +16,4 @@ function Navbar(props) {
   )
 };
 
-const mapStateToProps = state => ({
-  curPage: state.page
-});
-
-export default connect(mapStateToProps, { changePage })(Navbar);
+export default connect(null, { changePage })(Navbar);

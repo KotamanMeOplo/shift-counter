@@ -85,13 +85,15 @@ function PlannerPage(props) {
             )
           }
 
-          {
-            results.map((a, i) => 
-              <td key={i}>
-                <button style={{backgroundColor: a.color || 'transparent'}} onClick={chingeRes}>{a.name ? a.name[0] : a}</button>
-              </td>
-            )
-          }
+          <tr>
+            {
+              results.map((a, i) => 
+                <td key={i}>
+                  <button style={{backgroundColor: a.color || 'transparent'}} onClick={chingeRes}>{a.name ? a.name[0] : a}</button>
+                </td>
+              )
+            }
+          </tr>
         </tbody>
       </table>
     </div>
