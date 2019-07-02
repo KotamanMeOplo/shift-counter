@@ -5,7 +5,7 @@ import Modal from '../Modal';
 const getTable = cooks => cooks.map(cook => [cook, true, true, true, true, true, true, true]);
 
 // Returns array with cooks for each day which has only one cook else returns previous value of day
-const getResults = (table, changedDay = -1, def = ['n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a']) => {  
+const getResults = (table, changedDay = -1, def = ['n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a']) => {
   const cooksPerDay = table.reduce((pr, cur) => {
     for(let i = 1; i <= 7; i ++) {
       if(cur[i]) {
@@ -20,8 +20,11 @@ const getResults = (table, changedDay = -1, def = ['n/a', 'n/a', 'n/a', 'n/a', '
   cooksPerDay.forEach((a, i) => {
     if(a.length === 1) {
       results[i] = a[0];
-    } else if(changedDay === i + 1) {
-      results[i] = 'n/a';
+    } else if(results[i] !== 'n/a') {
+      const isCurrentCookAvailable = a.findIndex(a => a === results[i]) === -1;
+      if(isCurrentCookAvailable) {
+        results[i] = 'n/a';
+      }
     }
   });
 
