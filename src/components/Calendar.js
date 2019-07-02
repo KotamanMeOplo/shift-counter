@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import Modal from './Modal';
 import { fetchCooks } from '../actions/cookActions';
@@ -64,15 +64,13 @@ function Calendar(props) {
 
   return (
     <div>
-      {
-        modalVisibility &&
-        <Fragment>
-          <div id="backdrop" onClick={_ => setModalVisibility(false)} />
-          <Modal handleSubmit={selectedCook => submitHandler(selectedCook)}>
-            The cook on {selectedDate}
-          </Modal>
-        </Fragment>
-      }
+      <Modal
+        handleSubmit={selectedCook => submitHandler(selectedCook)}
+        open={modalVisibility}
+        onClose={_ => setModalVisibility(false)}
+      >
+        The cook on {selectedDate}
+      </Modal>
 
       <table>
         <thead>

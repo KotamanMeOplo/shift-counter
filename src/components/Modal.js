@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux';
 import { fetchCooks } from '../actions/cookActions';
 
 function Modal(props) {
-  const { cooks, handleSubmit, children } = props;
+  const { cooks, handleSubmit, children, open, onClose } = props;
   const [selectedCook, setSelectedCook] = useState('none');
 
   const submitHandler = (e, selectedCook) => {
@@ -11,22 +11,29 @@ function Modal(props) {
     handleSubmit(selectedCook);
   }
   return (
-    <div id="modal">
-      <div id="modal-header">
-        {children}
-      </div>
+    <div>
+      { open &&
+        <Fragment>
+          <div id="backdrop" onClick={onClose} />
+          <div id="modal">
+            <div id="modal-header">
+              {children}
+            </div>
 
-      <form onSubmit={e => submitHandler(e, selectedCook)}>
-        <select onChange={e => setSelectedCook(e.target.value)} value={selectedCook}>
-          <option name="none">none</option>
-          {
-            cooks.map(cook => 
-                <option name={cook.name} key={cook.name}>{cook.name}</option>
-            )
-          }
-        </select>
-        <button type="submit">Submit</button>
-      </form>
+            <form onSubmit={e => submitHandler(e, selectedCook)}>
+              <select onChange={e => setSelectedCook(e.target.value)} value={selectedCook}>
+                <option name="none">none</option>
+                {
+                  cooks.map(cook => 
+                      <option name={cook.name} key={cook.name}>{cook.name}</option>
+                  )
+                }
+              </select>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </Fragment>
+      }
     </div>
   )
 }
