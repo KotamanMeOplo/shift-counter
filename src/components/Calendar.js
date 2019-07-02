@@ -1,11 +1,11 @@
 import React, { useState, Fragment } from 'react'
 import { connect } from 'react-redux';
 import Modal from './Modal';
+import { fetchCooks } from '../actions/cookActions';
 
 function Calendar(props) {
   const [modalVisibility, setModalVisibility] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-
   const daysOfTheWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   const { month, year, cooks } = props;
@@ -42,13 +42,35 @@ function Calendar(props) {
     setModalVisibility(true);
   }
 
+  const submitHandler = (selectedCook) => {
+    const cooksCopy = [...cooks];
+
+    for(let i = 0; i < cooksCopy.length; i ++) {
+      //Delete the date from other Cooks
+      if(cooksCopy[i].additionalTimes.includes(selectedDate)) {
+        cooksCopy[i].additionalTimes = cooksCopy[i].additionalTimes.filter(a => a !== selectedDate);
+      }
+
+      if(cooksCopy[i].name === selectedCook) {
+        cooksCopy[i].additionalTimes.push(selectedDate);
+      }
+
+    }
+    
+    localStorage.cooks = JSON.stringify(cooksCopy);
+    fetchCooks();
+    setModalVisibility(false);
+  };
+
   return (
     <div>
       {
         modalVisibility &&
         <Fragment>
           <div id="backdrop" onClick={_ => setModalVisibility(false)} />
-          <Modal date={selectedDate} submitHandler={_ => setModalVisibility(false)} />
+          <Modal handleSubmit={selectedCook => submitHandler(selectedCook)}>
+            The cook on {selectedDate}
+          </Modal>
         </Fragment>
       }
 
@@ -99,4 +121,4 @@ const mapStateToProps = state => ({
   cooks: state.cooks
 });
 
-export default connect(mapStateToProps, null)(Calendar);
+export default connect(mapStateToProps, { fetchCooks })(Calendar);
