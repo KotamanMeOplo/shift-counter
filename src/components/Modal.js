@@ -1,6 +1,4 @@
-import React, { useState, Fragment } from 'react'
-import { connect } from 'react-redux';
-import { fetchCooks } from '../actions/cookActions';
+import React, { useState, Fragment } from 'react';
 
 function Modal(props) {
   const { cooks, handleSubmit, children, open, onClose } = props;
@@ -38,8 +36,4 @@ function Modal(props) {
   )
 }
 
-const mapStateToProps = state => ({
-  cooks: state.cooks
-});
-
-export default connect(mapStateToProps, { fetchCooks })(Modal);
+export default Modal;

@@ -34,6 +34,7 @@ function PlannerPage(props) {
   const [results, setResults] = useState(getResults(table));
   const [modalVisibility, setModalVisibility] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [availableCooks, setAvailableCooks] = useState([]);
   
   const tableHeading = ['N/A', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -46,6 +47,13 @@ function PlannerPage(props) {
 
   const handleResultDayClick = dayIndex => {
     setSelectedDay(tableHeading[dayIndex + 1]);
+    const currentCooks = [];
+    for(let i of table) {
+      if(i[dayIndex + 1]) {
+        currentCooks.push(i[0]);
+      }
+    }
+    setAvailableCooks(currentCooks);
     setModalVisibility(true);
   }
 
@@ -64,6 +72,7 @@ function PlannerPage(props) {
         open={modalVisibility}
         onClose={_ => setModalVisibility(false)}
         handleSubmit={cook => handleCookSelection(cook)}
+        cooks={availableCooks}
       >
         Cook on {selectedDay}
       </Modal>
