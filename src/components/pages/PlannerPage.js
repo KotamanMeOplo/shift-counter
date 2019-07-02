@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import Modal from '../Modal';
 
 const getTable = cooks => cooks.map(cook => [cook, true, true, true, true, true, true, true]);
 
@@ -31,8 +32,10 @@ function PlannerPage(props) {
   const { cooks } = props;
   const [table, setTable] = useState(getTable(cooks));
   const [results, setResults] = useState(getResults(table));
-
-  const tableHeading = ['N/A', 'M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(null);
+  
+  const tableHeading = ['N/A', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   const invertDay = (i, j) => {
     const tableCopy = [...table];
@@ -41,15 +44,37 @@ function PlannerPage(props) {
     setResults(getResults(table, j, results));
   }
 
+  const handleResultDayClick = dayIndex => {
+    setSelectedDay(tableHeading[dayIndex + 1]);
+    setModalVisibility(true);
+  }
+
+  const handleCookSelection = cook => {
+    const dayIndex = tableHeading.findIndex(a => a === selectedDay);
+    const resultsCopy = [...results];
+    resultsCopy[dayIndex - 1] = cooks.filter(a => a.name === cook)[0];
+    setResults(resultsCopy);
+
+    setModalVisibility(false);
+  }
+
   return (
     <div>
+      <Modal
+        open={modalVisibility}
+        onClose={_ => setModalVisibility(false)}
+        handleSubmit={cook => handleCookSelection(cook)}
+      >
+        Cook on {selectedDay}
+      </Modal>
+
       <h1>Planner</h1>
 
       <table>
         <thead>
           <tr>
             {
-              tableHeading.map((a, i) => <th key={i}>{a}</th>)
+              tableHeading.map((a, i) => <th key={i}>{a[0]}</th>)
             }
           </tr>
         </thead>
@@ -82,7 +107,12 @@ function PlannerPage(props) {
             {
               results.map((a, i) => 
                 <td key={i}>
-                  <button style={{backgroundColor: a.color || 'transparent'}}>{a.name ? a.name[0] : a}</button>
+                  <button
+                    style={{backgroundColor: a.color || 'transparent'}}
+                    onClick={_ => handleResultDayClick(i)}
+                  >
+                    {a.name ? a.name[0] : a}
+                  </button>
                 </td>
               )
             }
