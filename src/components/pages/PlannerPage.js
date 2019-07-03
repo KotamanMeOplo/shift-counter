@@ -89,6 +89,14 @@ function PlannerPage(props) {
     setModalVisibility(false);
   }
 
+  const handleClear = () => {
+    localStorage.table = JSON.stringify(getDefaultTable(cooks));
+    localStorage.results = JSON.stringify(getResults(table));
+
+    fetchTable();
+    fetchResults();
+  }
+
   return (
     <div>
       <Modal
@@ -101,6 +109,7 @@ function PlannerPage(props) {
       </Modal>
 
       <h1>Planner</h1>
+      <button onClick={handleClear}>Clear</button>
 
       <table>
         <thead>
