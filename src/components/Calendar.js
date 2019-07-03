@@ -63,7 +63,7 @@ function Calendar(props) {
   };
 
   return (
-    <div>
+    <div className="calendar-container">
       <Modal
         handleSubmit={selectedCook => submitHandler(selectedCook)}
         open={modalVisibility}
@@ -73,7 +73,7 @@ function Calendar(props) {
         The cook on {selectedDate}
       </Modal>
 
-      <table>
+      <table align="center">
         <thead>
           <tr>
             { daysOfTheWeek.map((a, i) => <th key={i}>{a}</th>) }
@@ -94,7 +94,7 @@ function Calendar(props) {
                     } else {
                       return pr
                     }
-                  }, 'white');
+                  }, '#323553');
 
                   const style = {
                     borderWidth: dateIsToday ? '5px' : '0px',

@@ -29,18 +29,18 @@ function CalendarPage(props) {
 
   return (
     <div>
-      <h3>Calendar</h3>
+      <h1>Calendar</h1>
 
-      <div>
+      <div id="calendar-controls">
         <button onClick={_ => onArrowClick(-1)}>&lt;</button>
-      { months[month] } { year }
-      <button onClick={_ => onArrowClick(1)}>&gt;</button>
+        <h4 id="calendar-month-year">{ months[month] } { year }</h4>
+        <button onClick={_ => onArrowClick(1)}>&gt;</button>
       </div>
       <Calendar month={month} year={year} />
 
       {
         cooks.map(cook => 
-          <div key={cook.name}>
+          <div className="calendar-cook" key={cook.name}>
             <h3><div className="cook-color" style={{backgroundColor: cook.color}} />: {cook.name} => {cook.initialTimes + cook.additionalTimes.length}</h3>
           </div>
         )

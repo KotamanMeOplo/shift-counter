@@ -1,7 +1,21 @@
+html {
+  background-color: #23253B;
+  height: 100%;
+  color: #F05316;
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+button {
+  font-family: 'Ubuntu', sans-serif;
+  background: none;
+  border: none;
+  color: #F05316
+}
+
 nav {
   height: 3.5rem;
-  background: #000;
-  color: white;
+  background: #0e0f18;
   position: absolute;
   width: 100%;
   top: 0;
@@ -15,7 +29,7 @@ nav > * {
 nav > button {
   outline: none;
   background: none;
-  color: white;
+  color: #F05316;
   border: none;
   font-size: 1rem;
   height: 3.5rem;
@@ -49,8 +63,16 @@ nav > button:hover {
   margin: 0 1rem;
 }
 
-table {
+#calendar-month-year {
+  display: inline-block;
+  margin: 1rem 5.5rem;
+}
+
+#calendar-controls button {
   font-size: 2rem;
+}
+
+table {
   text-align: center;
 }
 
@@ -67,6 +89,11 @@ table button {
   border-radius: 50%;
   border-color: yellowgreen;
   border-style: solid;
+  color: #F05316;
+}
+
+.calendar-cook {
+  text-align: left;
 }
 
 #backdrop {
@@ -82,7 +109,7 @@ table button {
   width: 75%;
   height: 25rem;
   position: absolute;
-  background-color: white;
+  background-color: #F05316;
   border-radius: 1rem;
   box-shadow: .5rem .5rem .5rem #000;
   overflow: hidden;
@@ -92,7 +119,7 @@ table button {
 
 #modal-header {
   background-color: darkslategrey;
-  color: white;
+  color: #F05316;
   padding: .5rem
 }
 
