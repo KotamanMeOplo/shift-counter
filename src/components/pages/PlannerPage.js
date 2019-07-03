@@ -4,7 +4,9 @@ import Modal from '../Modal';
 import { fetchTable, fetchResults } from '../../actions/plannerActions';
 
 const getDefaultTable = cooks => cooks.map(cook => [cook, true, true, true, true, true, true, true]);
+
 const areObjectsEqual = (obj1, obj2) => JSON.stringify(obj1) === JSON.stringify(obj2);
+const setPropInLS = (prop, val) => localStorage[prop] = JSON.stringify(val);
 
 // Returns array with cooks for each day which has only one cook else returns previous value of day
 const getResults = (table, def = ['n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a']) => {
@@ -34,7 +36,7 @@ const getResults = (table, def = ['n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a
 }
 
 const updateLocalStorage = (cooks, fetchTable) => {
-  localStorage.table = JSON.stringify(getDefaultTable(cooks));
+  setPropInLS('table', getDefaultTable(cooks));
   fetchTable();
 }
 
@@ -61,8 +63,8 @@ function PlannerPage(props) {
   const invertDay = (i, j) => {
     const tableCopy = [...table];
     tableCopy[i][j] = !tableCopy[i][j];
-    localStorage.table = JSON.stringify(tableCopy);
-    localStorage.results = JSON.stringify(getResults(table, results));
+    setPropInLS('table', tableCopy);
+    setPropInLS('results', getResults(table, results));
     fetchTable();
     fetchResults();
   }
@@ -83,15 +85,15 @@ function PlannerPage(props) {
     const dayIndex = tableHeading.findIndex(a => a === selectedDay);
     const resultsCopy = [...results];
     resultsCopy[dayIndex - 1] = cooks.filter(a => a.name === cook)[0];
-    localStorage.results = JSON.stringify(resultsCopy);
+    setPropInLS('results', resultsCopy);
     fetchResults();
 
     setModalVisibility(false);
   }
 
   const handleClear = () => {
-    localStorage.table = JSON.stringify(getDefaultTable(cooks));
-    localStorage.results = JSON.stringify(getResults(table));
+    setPropInLS('table', getDefaultTable(cooks));
+    setPropInLS('results', getResults(table));
 
     fetchTable();
     fetchResults();
