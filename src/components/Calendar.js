@@ -68,7 +68,7 @@ function Calendar(props) {
         handleSubmit={selectedCook => submitHandler(selectedCook)}
         open={modalVisibility}
         onClose={_ => setModalVisibility(false)}
-        cooks
+        cooks={cooks}
       >
         The cook on {selectedDate}
       </Modal>
