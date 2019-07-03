@@ -93,7 +93,7 @@ function PlannerPage(props) {
 
   const handleClear = () => {
     setPropInLS('table', getDefaultTable(cooks));
-    setPropInLS('results', getResults(table));
+    setPropInLS('results', getResults(getDefaultTable(cooks)));
 
     fetchTable();
     fetchResults();
