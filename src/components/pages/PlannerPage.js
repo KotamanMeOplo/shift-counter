@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import Modal from '../Modal';
+import { fetchTable, fetchResults } from '../../actions/plannerActions';
 
-const getTable = cooks => cooks.map(cook => [cook, true, true, true, true, true, true, true]);
+const getDefaultTable = cooks => cooks.map(cook => [cook, true, true, true, true, true, true, true]);
+const areObjectsEqual = (obj1, obj2) => JSON.stringify(obj1) === JSON.stringify(obj2);
 
 // Returns array with cooks for each day which has only one cook else returns previous value of day
-const getResults = (table, changedDay = -1, def = ['n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a']) => {
+const getResults = (table, def = ['n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a']) => {
   const cooksPerDay = table.reduce((pr, cur) => {
     for(let i = 1; i <= 7; i ++) {
       if(cur[i]) {
@@ -21,8 +23,8 @@ const getResults = (table, changedDay = -1, def = ['n/a', 'n/a', 'n/a', 'n/a', '
     if(a.length === 1) {
       results[i] = a[0];
     } else if(results[i] !== 'n/a') {
-      const isCurrentCookAvailable = a.findIndex(a => a === results[i]) === -1;
-      if(isCurrentCookAvailable) {
+      const isCurrentCookUnavailable = a.findIndex(a => areObjectsEqual(a, results[i])) === -1;
+      if(isCurrentCookUnavailable) {
         results[i] = 'n/a';
       }
     }
@@ -31,21 +33,38 @@ const getResults = (table, changedDay = -1, def = ['n/a', 'n/a', 'n/a', 'n/a', '
   return results;
 }
 
+const updateLocalStorage = (cooks, fetchTable) => {
+  localStorage.table = JSON.stringify(getDefaultTable(cooks));
+  fetchTable();
+}
+
 function PlannerPage(props) {
-  const { cooks } = props;
-  const [table, setTable] = useState(getTable(cooks));
-  const [results, setResults] = useState(getResults(table));
+  const { cooks, table, results, fetchTable, fetchResults } = props;
+  
   const [modalVisibility, setModalVisibility] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [availableCooks, setAvailableCooks] = useState([]);
+  
+    // Update table whenever there is a change to the cooks (edit, deletion, new cook)
+    if(cooks.length === table.length) {
+      const areAllCooksInTable = cooks.every((cook, i) => areObjectsEqual(cook, table[i][0]));
+  
+      if(!areAllCooksInTable) {
+        updateLocalStorage(cooks, fetchTable);
+      }    
+    } else {
+      updateLocalStorage(cooks, fetchTable);
+    }
   
   const tableHeading = ['N/A', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   const invertDay = (i, j) => {
     const tableCopy = [...table];
     tableCopy[i][j] = !tableCopy[i][j];
-    setTable(tableCopy);
-    setResults(getResults(table, j, results));
+    localStorage.table = JSON.stringify(tableCopy);
+    localStorage.results = JSON.stringify(getResults(table, results));
+    fetchTable();
+    fetchResults();
   }
 
   const handleResultDayClick = dayIndex => {
@@ -64,7 +83,8 @@ function PlannerPage(props) {
     const dayIndex = tableHeading.findIndex(a => a === selectedDay);
     const resultsCopy = [...results];
     resultsCopy[dayIndex - 1] = cooks.filter(a => a.name === cook)[0];
-    setResults(resultsCopy);
+    localStorage.results = JSON.stringify(resultsCopy);
+    fetchResults();
 
     setModalVisibility(false);
   }
@@ -136,7 +156,9 @@ function PlannerPage(props) {
 }
 
 const mapStateToProps = state => ({
-  cooks: state.cooks
+  cooks: state.cooks,
+  table: state.table,
+  results: state.results
 });
 
-export default connect(mapStateToProps, null)(PlannerPage);
+export default connect(mapStateToProps, { fetchResults, fetchTable })(PlannerPage);
