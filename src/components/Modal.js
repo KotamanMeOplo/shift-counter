@@ -8,18 +8,19 @@ function Modal(props) {
     e.preventDefault();
     handleSubmit(selectedCook);
   }
+  
   return (
     <div>
       { open &&
         <Fragment>
           <div id="backdrop" onClick={onClose} />
-          <div id="modal">
-            <div id="modal-header">
+          <div id="modal" className="card accent-card">
+            <h3 id="modal-header">
               {children}
-            </div>
+            </h3>
 
             <form onSubmit={e => submitHandler(e, selectedCook)}>
-              <select onChange={e => setSelectedCook(e.target.value)} value={selectedCook}>
+              <select className="button" onChange={e => setSelectedCook(e.target.value)} value={selectedCook}>
                 <option name="none">none</option>
                 {
                   cooks.map(cook => 

@@ -63,7 +63,7 @@ function Calendar(props) {
   };
 
   return (
-    <div className="calendar-container">
+    <div id="calendar-container" className="card dark-card">
       <Modal
         handleSubmit={selectedCook => submitHandler(selectedCook)}
         open={modalVisibility}
@@ -94,7 +94,7 @@ function Calendar(props) {
                     } else {
                       return pr
                     }
-                  }, '#323553');
+                  }, '#444444');
 
                   const style = {
                     borderWidth: dateIsToday ? '5px' : '0px',

@@ -1,24 +1,32 @@
 html {
-  background-color: #23253B;
+  background-color: #444444;
   height: 100%;
-  color: #F05316;
+  color: #FBF9FA;
   text-align: center;
   font-family: 'Ubuntu', sans-serif;
+}
+
+h1 {
+  margin-bottom: .5rem;
+  padding-top: 1rem;
 }
 
 button {
   font-family: 'Ubuntu', sans-serif;
   background: none;
   border: none;
-  color: #F05316
+  color: #FBF9FA;
 }
 
 nav {
   height: 3.5rem;
-  background: #0e0f18;
-  position: absolute;
+  background: #62BD4B;
+  position: fixed;
   width: 100%;
   top: 0;
+  text-align: left;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 nav > * {
@@ -29,7 +37,7 @@ nav > * {
 nav > button {
   outline: none;
   background: none;
-  color: #F05316;
+  color: #FBF9FA;
   border: none;
   font-size: 1rem;
   height: 3.5rem;
@@ -63,9 +71,37 @@ nav > button:hover {
   margin: 0 1rem;
 }
 
+#calendar-container {
+  width: 19rem;
+  height: 15rem;
+}
+
+.card {
+  box-shadow: 0 0 .5rem black;
+  border-radius: .5rem;
+  margin: 0 auto;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.light-card {
+  background-color: #FBF9FA;
+  color: #444444;
+}
+
+.dark-card {
+  background-color: #1f1f1f;
+  color: #FBF9FA;
+}
+
+.accent-card {
+  background-color: #E84329;
+  color: #FBF9FA;
+}
 #calendar-month-year {
   display: inline-block;
-  margin: 1rem 5.5rem;
+  margin: 1rem 1rem;
+  width: 13rem;
 }
 
 #calendar-controls button {
@@ -89,40 +125,71 @@ table button {
   border-radius: 50%;
   border-color: yellowgreen;
   border-style: solid;
-  color: #F05316;
+  color: #FBF9FA;
 }
 
-.calendar-cook {
+#calendar-stats-heading {
+  color: #62BD4B;
+  margin: 0;
+}
+
+#calendar-cooks {
   text-align: left;
+  width: 19rem;
 }
 
 #backdrop {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, .4);
-  position: absolute;
   top: 0;
+  left: 0;
   text-align: center;
+  position: fixed;
 }
 
 #modal {
-  width: 75%;
-  height: 25rem;
-  position: absolute;
-  background-color: #F05316;
-  border-radius: 1rem;
-  box-shadow: .5rem .5rem .5rem #000;
+  position: fixed;
   overflow: hidden;
   z-index: 0;
   text-align: center;
+  margin: 0 auto;
+  padding: 1.5rem;
 }
 
 #modal-header {
-  background-color: darkslategrey;
-  color: #F05316;
-  padding: .5rem
+  /* background-color: darkslategrey;
+  color: #FBF9FA; */
+  margin: 0 0 2rem 0;
 }
 
 #modal-header h3 {
   margin: 0;
+}
+
+select {
+  font-family: 'Ubuntu', sans-serif;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.button {
+  box-shadow: 0 0 1rem -.1rem black;
+  border-radius: .5rem;
+  margin: 0 auto;
+  padding: 1rem;
+  padding: 1rem 2rem;
+}
+
+option {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 2rem;
+  width: 5rem;
+  background-color: green;
+  border-radius: .5rem;
 }

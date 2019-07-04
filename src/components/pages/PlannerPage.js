@@ -131,9 +131,9 @@ function PlannerPage(props) {
                     if(j === 0) {
                       node = b.name;
                     } else if(b) {
-                      node = <button style={{backgroundColor: 'green'}} onClick={_ => invertDay(i, j)}>I</button>
+                      node = <button style={{backgroundColor: '#62BD4B'}} onClick={_ => invertDay(i, j)}>I</button>
                     } else {
-                      node = <button style={{backgroundColor: 'red'}} onClick={_ => invertDay(i, j)}>0</button>
+                      node = <button style={{backgroundColor: '#E84329'}} onClick={_ => invertDay(i, j)}>0</button>
                     }
                     
                     return (
