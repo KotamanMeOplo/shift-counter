@@ -2,7 +2,7 @@ import React, { useState, Fragment } from 'react';
 
 function Modal(props) {
   const { cooks, handleSubmit, children, open, onClose } = props;
-  const [selectedCook, setSelectedCook] = useState('none');
+  const [selectedCook, setSelectedCook] = useState('None');
 
   const submitHandler = (e, selectedCook) => {
     e.preventDefault();
@@ -20,14 +20,31 @@ function Modal(props) {
             </h3>
 
             <form onSubmit={e => submitHandler(e, selectedCook)}>
-              <select className="button" onChange={e => setSelectedCook(e.target.value)} value={selectedCook}>
-                <option name="none">none</option>
-                {
-                  cooks.map(cook => 
-                      <option name={cook.name} key={cook.name}>{cook.name}</option>
-                  )
-                }
-              </select>
+              <label className="radio">
+                <input
+                  type="radio"
+                  name="cooks"
+                  value="None" 
+                  onChange={_ => setSelectedCook('None')}
+                  checked={selectedCook === 'None'}
+                />
+                None
+              </label>
+              {
+                cooks.map(cook => 
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="cooks"
+                      value={cook.name}
+                      key={cook.name}
+                      onChange={e => setSelectedCook(e.target.value)}
+                      checked={selectedCook === cook.name}
+                    />
+                    { cook.name }
+                  </label>
+                )
+              }
               <button type="submit">Submit</button>
             </form>
           </div>

@@ -167,29 +167,8 @@ table button {
   margin: 0;
 }
 
-select {
-  font-family: 'Ubuntu', sans-serif;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-select::-ms-expand {
-  display: none;
-}
-
-.button {
-  box-shadow: 0 0 1rem -.1rem black;
-  border-radius: .5rem;
-  margin: 0 auto;
-  padding: 1rem;
-  padding: 1rem 2rem;
-}
-
-option {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  height: 2rem;
-  width: 5rem;
-  background-color: green;
-  border-radius: .5rem;
+.radio {
+  display: block;
+  text-align: left;
+  margin-bottom: .5rem;
 }
