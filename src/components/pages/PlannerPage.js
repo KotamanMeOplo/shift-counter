@@ -84,7 +84,13 @@ function PlannerPage(props) {
   const handleCookSelection = cook => {
     const dayIndex = tableHeading.findIndex(a => a === selectedDay);
     const resultsCopy = [...results];
-    resultsCopy[dayIndex - 1] = cooks.filter(a => a.name === cook)[0];
+
+    if(cook !== 'None') {
+      resultsCopy[dayIndex - 1] = cooks.filter(a => a.name === cook)[0];
+    } else {
+      resultsCopy[dayIndex - 1] = 'n/a';
+    }
+
     setPropInLS('results', resultsCopy);
     fetchResults();
 
