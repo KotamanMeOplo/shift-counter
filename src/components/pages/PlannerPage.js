@@ -111,9 +111,8 @@ function PlannerPage(props) {
       </Modal>
 
       <h1>Planner</h1>
-      <button onClick={handleClear}>Clear</button>
 
-      <table>
+      <table align="center" id="planner" className="basic-style light-color">
         <thead>
           <tr>
             {
@@ -129,11 +128,11 @@ function PlannerPage(props) {
                   a.map((b, j) => {
                     let node;
                     if(j === 0) {
-                      node = b.name;
+                      node = <div style={{backgroundColor: cooks[i].color}}>{b.name}</div>;
                     } else if(b) {
-                      node = <button style={{backgroundColor: '#62BD4B'}} onClick={_ => invertDay(i, j)}>I</button>
+                      node = <button style={{backgroundColor: cooks[i].color}} onClick={_ => invertDay(i, j)}>I</button>
                     } else {
-                      node = <button style={{backgroundColor: '#E84329'}} onClick={_ => invertDay(i, j)}>0</button>
+                      node = <button style={{backgroundColor: 'transparent'}} onClick={_ => invertDay(i, j)}>X</button>
                     }
                     
                     return (
@@ -162,6 +161,8 @@ function PlannerPage(props) {
           </tr>
         </tbody>
       </table>
+
+      <button className="basic-style dark-color btn" onClick={handleClear}>Clear</button>
     </div>
   )
 }

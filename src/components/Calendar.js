@@ -63,7 +63,7 @@ function Calendar(props) {
   };
 
   return (
-    <div id="calendar-container" className="basic-style card dark-color">
+    <div id="calendar-container">
       <Modal
         handleSubmit={selectedCook => submitHandler(selectedCook)}
         open={modalVisibility}
@@ -73,7 +73,7 @@ function Calendar(props) {
         The cook on {selectedDate}
       </Modal>
 
-      <table align="center">
+      <table align="center" id="calendar" className="basic-style card dark-color">
         <thead>
           <tr>
             { daysOfTheWeek.map((a, i) => <th key={i}>{a}</th>) }
