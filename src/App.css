@@ -60,6 +60,8 @@ nav > button:hover, nav > button:active {
   width: 1.5rem;
   display: inline-block;
   border-radius: 5px;
+  bottom: 0;
+  margin: 0 .5rem -.35rem 0;
 }
 
 .cook-info {
@@ -127,6 +129,7 @@ table button {
   border-color: yellowgreen;
   border-style: solid;
   color: #FBF9FA;
+  outline: none;
 }
 
 #calendar-stats-heading {
@@ -150,7 +153,7 @@ table button {
 }
 
 #modal {
-  position: fixed;
+  position: relative;
   overflow: hidden;
   z-index: 0;
   text-align: center;
@@ -159,8 +162,6 @@ table button {
 }
 
 #modal-header {
-  /* background-color: darkslategrey;
-  color: #FBF9FA; */
   margin: 0 0 2rem 0;
 }
 
@@ -177,6 +178,10 @@ table button {
 .btn {
   padding: .75rem 2rem;
   box-shadow: none !important;
+}
+
+#modal-submit {
+  margin-top: 1rem;
 }
 
 .basic-style {

@@ -45,7 +45,7 @@ function Modal(props) {
                   </label>
                 )
               }
-              <button className="basic-style btn light-color" type="submit">SUBMIT</button>
+              <button id="modal-submit" className="basic-style btn light-color" type="submit">SUBMIT</button>
             </form>
           </div>
         </Fragment>
