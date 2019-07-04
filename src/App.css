@@ -68,12 +68,15 @@ nav > button:hover, nav > button:active {
   display: inline-block;
 }
 
-.cook-block {
-  padding: .5rem;
+.cook-block button {
+  padding: 0;
+  height: 1.75rem;
+  width: 1.75rem;
+  box-shadow: none;
 }
 
-.cook-block > * {
-  margin: 0 1rem;
+.delete {
+  margin-right: 1rem;
 }
 
 #calendar-container {
@@ -97,10 +100,21 @@ nav > button:hover, nav > button:active {
   color: #FBF9FA;
 }
 
-.accent-color {
+.accent2-color {
   background-color: #E84329;
   color: #FBF9FA;
 }
+
+.primary-color {
+  background-color: #62BD4B;
+  color: #FBF9FA;
+}
+
+.accent1-color {
+  background-color: #CBA06A;
+  color: #444444;
+}
+
 #calendar-month-year {
   display: inline-block;
   margin: 1rem 1rem;
@@ -132,12 +146,12 @@ table button {
   outline: none;
 }
 
-#calendar-stats-heading {
+.heading {
   color: #62BD4B;
   margin: 0;
 }
 
-#calendar-cooks {
+.left-text-card {
   text-align: left;
   width: 19rem;
 }
@@ -187,4 +201,39 @@ table button {
 .basic-style {
   border-radius: .3rem;
   box-shadow: 0 0 .5rem black;
+}
+
+input:not([type]), input[type='text'], input[type='number'] {
+  background-color: transparent;
+  border-width: 0;
+  border-bottom: 1px solid #62BD4B;
+  outline: none;
+  color: white;
+  font-size: 1.25rem;
+  display: block;
+  width: 15rem;
+  padding: .5rem 0;
+}
+
+.cook-input {
+  text-align: left;
+  width: 15rem;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+}
+
+#cook-form label {
+  color: #62BD4B;
+  font-size: .85rem;
+}
+
+#cook-form {
+  margin-bottom: 2rem;
+}
+
+input[type="color"] {
+  border: none;
+  width: 15rem;
+  display: block;
+  margin: .5rem 0;
 }

@@ -14,7 +14,7 @@ function Modal(props) {
       { open &&
         <Fragment>
           <div id="backdrop" onClick={onClose} />
-          <div id="modal" className="basic-style card accent-color">
+          <div id="modal" className="basic-style card accent2-color">
             <h3 id="modal-header">
               {children}
             </h3>

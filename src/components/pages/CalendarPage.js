@@ -38,8 +38,8 @@ function CalendarPage(props) {
       </div>
       <Calendar month={month} year={year} />
 
-      <div id="calendar-cooks" className="basic-style card light-color">
-        <h5 id="calendar-stats-heading">COOK TIMES</h5>
+      <div className="basic-style card light-color left-text-card">
+        <h5 className="heading">COOK TIMES</h5>
         {
           cooks.map(cook => 
               <h3 key={cook.name}><div className="cook-color" style={{backgroundColor: cook.color}} />: {cook.name} => {cook.initialTimes + cook.additionalTimes.length}</h3>
