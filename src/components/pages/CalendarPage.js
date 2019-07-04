@@ -38,7 +38,7 @@ function CalendarPage(props) {
       </div>
       <Calendar month={month} year={year} />
 
-      <div id="calendar-cooks" className="card light-card">
+      <div id="calendar-cooks" className="basic-style card light-color">
         <h5 id="calendar-stats-heading">COOK TIMES</h5>
         {
           cooks.map(cook => 

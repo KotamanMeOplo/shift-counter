@@ -14,7 +14,7 @@ function Modal(props) {
       { open &&
         <Fragment>
           <div id="backdrop" onClick={onClose} />
-          <div id="modal" className="card accent-card">
+          <div id="modal" className="basic-style card accent-color">
             <h3 id="modal-header">
               {children}
             </h3>
@@ -45,7 +45,7 @@ function Modal(props) {
                   </label>
                 )
               }
-              <button type="submit">Submit</button>
+              <button className="basic-style btn light-color" type="submit">SUBMIT</button>
             </form>
           </div>
         </Fragment>

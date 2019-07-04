@@ -63,7 +63,7 @@ function Calendar(props) {
   };
 
   return (
-    <div id="calendar-container" className="card dark-card">
+    <div id="calendar-container" className="basic-style card dark-color">
       <Modal
         handleSubmit={selectedCook => submitHandler(selectedCook)}
         open={modalVisibility}

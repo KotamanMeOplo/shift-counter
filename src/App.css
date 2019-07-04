@@ -77,24 +77,22 @@ nav > button:hover {
 }
 
 .card {
-  box-shadow: 0 0 .5rem black;
-  border-radius: .5rem;
   margin: 0 auto;
   padding: 1rem;
   margin-bottom: 2rem;
 }
 
-.light-card {
+.light-color {
   background-color: #FBF9FA;
   color: #444444;
 }
 
-.dark-card {
+.dark-color {
   background-color: #1f1f1f;
   color: #FBF9FA;
 }
 
-.accent-card {
+.accent-color {
   background-color: #E84329;
   color: #FBF9FA;
 }
@@ -171,4 +169,14 @@ table button {
   display: block;
   text-align: left;
   margin-bottom: .5rem;
+}
+
+.btn {
+  padding: .75rem 2rem;
+  box-shadow: none !important;
+}
+
+.basic-style {
+  border-radius: .3rem;
+  box-shadow: 0 0 .5rem black;
 }
