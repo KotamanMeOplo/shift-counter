@@ -8,7 +8,7 @@ function Calendar(props) {
   const [selectedDate, setSelectedDate] = useState(null);
   const daysOfTheWeek = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
-  const { month, year, cooks } = props;
+  const { month, year, cooks, fetchCooks } = props;
 
   const firstDayOfTheMonth = new Date(year, month, 1);
   const lastDayOfTheMonth = new Date(year, month + 1, 0);
