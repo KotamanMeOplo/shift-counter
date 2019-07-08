@@ -41,9 +41,12 @@ function CalendarPage(props) {
       <div className="basic-style card light-color left-text-card">
         <h5 className="heading">COOK TIMES</h5>
         {
-          cooks.map(cook => 
+          [...cooks]
+            .sort((cook1, cook2) => 
+              (cook2.initialTimes + cook2.additionalTimes.length) - (cook1.initialTimes + cook1.additionalTimes.length))
+            .map(cook => 
               <h3 key={cook.name}><div className="cook-color" style={{backgroundColor: cook.color}} />: {cook.name} => {cook.initialTimes + cook.additionalTimes.length}</h3>
-          )
+            )
         }
       </div>
     </div>
