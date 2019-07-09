@@ -9,6 +9,7 @@ function CooksPage(props) {
   const [cookTimes, setCookTimes] = useState(0);
   const [cookAdditionalTimes, setAdditionalTimes] = useState([]);
   const [cookColor, setCookColor] = useState('#000');
+  const [cookIndex, setCookIndex] = useState(null);
 
   const getAllCooks = () => JSON.parse(localStorage.getItem('cooks')) || [];
 
@@ -24,7 +25,12 @@ function CooksPage(props) {
 
     // Update local storage
     const allCooks = getAllCooks();
-    allCooks.push(newCook);
+    if(cookIndex !== null) {
+      allCooks.splice(cookIndex, 0, newCook);
+      setCookIndex(null);
+    } else {
+      allCooks.push(newCook);
+    }
     localStorage.cooks = JSON.stringify(allCooks);
 
     fetchCooks();
@@ -40,11 +46,12 @@ function CooksPage(props) {
     fetchCooks();
   }
 
-  const onEditCook = cook => {
+  const onEditCook = (cook, index) => {
     setCookName(cook.name);
     setCookTimes(cook.initialTimes);
     setAdditionalTimes(cook.additionalTimes);
     setCookColor(cook.color);
+    setCookIndex(index);
 
     onDeleteCook(cook);
   }
@@ -78,7 +85,7 @@ function CooksPage(props) {
               <button className="basic-style accent2-color delete" onClick={_ => onDeleteCook(a)}>
                 <i className="fa fa-trash fa-lg" aria-hidden="true"></i>
               </button>
-              <button className="basic-style primary-color edit"onClick={_ => onEditCook(a)}>
+              <button className="basic-style primary-color edit"onClick={_ => onEditCook(a, i)}>
                 <i className="fa fa-pencil fa-lg" aria-hidden="true"></i>
               </button>
             </div>

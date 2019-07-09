@@ -35,28 +35,58 @@ const getResults = (table, def = ['n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a', 'n/a
   return results;
 }
 
-const updateLocalStorage = (cooks, fetchTable) => {
-  setPropInLS('table', getDefaultTable(cooks));
+const updateCooksInTable = (cooks, table, fetchTable) => {
+  const newTable = [...table];
+  
+  cooks.forEach((cook, i) => {
+    newTable[i][0] = cook;
+  });
+
+  setPropInLS('table', newTable);
   fetchTable();
 }
 
 function PlannerPage(props) {
-  const { cooks, table, results, fetchTable, fetchResults } = props;
+  const { cooks, results, fetchTable, fetchResults } = props;
+  let { table } = props;
   
   const [modalVisibility, setModalVisibility] = useState(false);
   const [selectedDay, setSelectedDay] = useState(null);
   const [availableCooks, setAvailableCooks] = useState([]);
   
-    // Update table whenever there is a change to the cooks (edit, deletion, new cook)
-    if(cooks.length === table.length) {
-      const areAllCooksInTable = cooks.every((cook, i) => areObjectsEqual(cook, table[i][0]));
-  
-      if(!areAllCooksInTable) {
-        updateLocalStorage(cooks, fetchTable);
-      }    
-    } else {
-      updateLocalStorage(cooks, fetchTable);
-    }
+  // Update table whenever there is a change to the cooks (edit, deletion, new cook)
+  if(cooks.length === table.length) {
+    const areAllCooksInTable = cooks.every((cook, i) => areObjectsEqual(cook, table[i][0]));
+
+    if(!areAllCooksInTable) {
+      updateCooksInTable(cooks, table, fetchTable);
+    }    
+  } else {
+    const newAndDeletedCooks = cooks
+      .filter(cook => !table.some(a => a[0].name === cook.name))
+      .map(cook => ({ cook, status: 'new'}))
+      .concat(table
+        .filter(a => !cooks.some(cook => a[0].name === cook.name))
+        .map(row => ({ cook: row[0], status: 'deleted'})));
+
+    let newTable = [...table];
+    newAndDeletedCooks.forEach(item => {
+      switch(item.status) {
+        case 'new':
+          newTable.push([item.cook, true, true, true, true, true, true, true]);
+          break;
+        case 'deleted':
+          newTable = newTable.filter(row => row[0].name !== item.cook.name);
+          break;
+        default:
+          console.log('Something went wrong');
+      }
+    });
+
+    // Set table no nothing as a placeholder until localStorage updates
+    table = [];
+    updateCooksInTable(cooks, newTable, fetchTable);
+  }
   
   const tableHeading = ['N/A', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -153,6 +183,7 @@ function PlannerPage(props) {
           <tr>
             <td></td>
             {
+
               results.map((a, i) => 
                 <td key={i}>
                   <button
