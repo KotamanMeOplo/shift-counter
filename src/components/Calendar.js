@@ -103,7 +103,7 @@ function Calendar(props) {
 
                   return (
                     <td key={j}>
-                      <button style={style} onClick={_ => onDateClick(date)}>{date}</button>
+                      <button style={style} onClick={_ => onDateClick(date)} disabled={date === ''}>{date}</button>
                     </td>
                   );
                 }) }
