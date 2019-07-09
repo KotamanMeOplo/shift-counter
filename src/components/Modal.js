@@ -32,12 +32,11 @@ function Modal(props) {
               </label>
               {
                 cooks.map(cook => 
-                  <label className="radio">
+                  <label className="radio" key={cook.name}>
                     <input
                       type="radio"
                       name="cooks"
                       value={cook.name}
-                      key={cook.name}
                       onChange={e => setSelectedCook(e.target.value)}
                       checked={selectedCook === cook.name}
                     />
