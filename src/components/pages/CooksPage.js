@@ -11,8 +11,6 @@ function CooksPage(props) {
   const [cookColor, setCookColor] = useState('#000');
   const [cookIndex, setCookIndex] = useState(null);
 
-  const getAllCooks = () => JSON.parse(localStorage.getItem('cooks')) || [];
-
   const onSubmit = e => {
     e.preventDefault();
     
@@ -24,7 +22,7 @@ function CooksPage(props) {
     };
 
     // Update local storage
-    const allCooks = getAllCooks();
+    const allCooks = [...cooks];
     if(cookIndex !== null) {
       allCooks.splice(cookIndex, 0, newCook);
       setCookIndex(null);
@@ -39,7 +37,7 @@ function CooksPage(props) {
   }
 
   const onDeleteCook = cook => {
-    let allCooks = getAllCooks();
+    let allCooks = [...cooks];
     allCooks = allCooks.filter(a => a.name !== cook.name);
     localStorage.cooks = JSON.stringify(allCooks);
 
