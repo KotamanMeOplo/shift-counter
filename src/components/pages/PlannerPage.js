@@ -60,6 +60,8 @@ function PlannerPage(props) {
 
     if(!areAllCooksInTable) {
       updateCooksInTable(cooks, table, fetchTable);
+      setPropInLS('results', getResults(table));
+      fetchResults();
     }    
   } else {
     const newAndDeletedCooks = cooks
@@ -86,6 +88,8 @@ function PlannerPage(props) {
     // Set table no nothing as a placeholder until localStorage updates
     table = [];
     updateCooksInTable(cooks, newTable, fetchTable);
+    setPropInLS('results', getResults(table));
+    fetchResults();
   }
   
   const tableHeading = ['N/A', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
