@@ -267,3 +267,13 @@ input[type="color"] {
 .heading {
   text-align: center;
 }
+
+#media a{
+  color: white;
+  cursor: pointer;
+}
+
+#media {
+  display: flex;
+  justify-content: space-evenly;
+}
