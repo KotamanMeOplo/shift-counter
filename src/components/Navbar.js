@@ -9,9 +9,11 @@ function Navbar(props) {
 
   return (
     <nav>
-      <button onClick={onClickButton}>Calendar</button>
-      <button onClick={onClickButton}>Cooks</button>
-      <button onClick={onClickButton}>Planner</button>
+      {
+        ['Calendar', 'Cooks', 'Planner', 'Info'].map(a =>
+          <button onClick={onClickButton}>{a}</button>
+        )
+      }
     </nav>
   )
 };

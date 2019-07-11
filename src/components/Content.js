@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CalendarPage from './pages/CalendarPage';
 import CooksPage from './pages/CooksPage';
 import PlannerPage from './pages/PlannerPage';
+import InfoPage from './pages/InfoPage';
 
 function Content(props) {
   return (
@@ -18,6 +19,10 @@ function Content(props) {
       {
         props.page === 'Planner' &&
         <PlannerPage />
+      }
+      {
+        props.page === 'Info' &&
+        <InfoPage />
       }
     </div>
   )

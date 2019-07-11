@@ -75,7 +75,7 @@ function CooksPage(props) {
       </form>
 
       <div className="basic-style card light-color left-text-card">
-        <h5 className="heading">COOKS</h5>
+        <h5 className="card-heading">COOKS</h5>
         {
           cooks.map((a, i) => 
             <div key={i} className="cook-block">

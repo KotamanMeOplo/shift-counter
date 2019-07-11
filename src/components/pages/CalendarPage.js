@@ -39,7 +39,7 @@ function CalendarPage(props) {
       <Calendar month={month} year={year} />
 
       <div className="basic-style card light-color left-text-card">
-        <h5 className="heading">COOK TIMES</h5>
+        <h5 className="card-heading">COOK TIMES</h5>
         {
           [...cooks]
             .sort((cook1, cook2) => 
