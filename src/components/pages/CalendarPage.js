@@ -38,7 +38,7 @@ function CalendarPage(props) {
       </div>
       <Calendar month={month} year={year} />
 
-      <div className="basic-style card light-color left-text-card">
+      <div className="basic-style card light-color">
         <h5 className="card-heading">COOK TIMES</h5>
         {
           [...cooks]

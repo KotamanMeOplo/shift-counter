@@ -83,6 +83,8 @@ nav > button:hover, nav > button:active {
   margin: 0 auto;
   padding: 1rem;
   margin-bottom: 2rem;
+  text-align: left;
+  width: 19rem;
 }
 
 .light-color {
@@ -144,11 +146,6 @@ nav > button:hover, nav > button:active {
 .card-heading {
   color: #62BD4B;
   margin: 0;
-}
-
-.left-text-card {
-  text-align: left;
-  width: 19rem;
 }
 
 #backdrop {
@@ -260,7 +257,6 @@ input[type="color"] {
 
 #info-page {
   text-align: left;
-  padding: 1rem;
   padding-top: 0;
 }
 

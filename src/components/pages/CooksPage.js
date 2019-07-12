@@ -74,7 +74,7 @@ function CooksPage(props) {
         <button className="basic-style primary-color btn" type="submit">Submit</button>
       </form>
 
-      <div className="basic-style card light-color left-text-card">
+      <div className="basic-style card light-color">
         <h5 className="card-heading">COOKS</h5>
         {
           cooks.map((a, i) => 
