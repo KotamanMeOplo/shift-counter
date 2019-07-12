@@ -46,6 +46,39 @@ const updateCooksInTable = (cooks, table, fetchTable) => {
   fetchTable();
 }
 
+const updateResultsIfCookDeletedOrEdited = (cooks, results, table, fetchResults) => {
+  const newResults = results.map(a => {
+    if(a === 'n/a') {
+      return a;
+    } else {
+      const updatedCook = cooks.filter(cook => cook.name === a.name)[0];
+
+      if(updatedCook) {
+        return updatedCook;
+      } else {
+        return 'n/a';
+      }
+    }
+  });
+
+  const didResultsChange = !newResults.every((a, i) => {
+    if(typeof a !== typeof results[i]) {
+      return false;
+    } else {
+      if(typeof a === 'string') {
+        return a === results[i];
+      } else {
+        return areObjectsEqual(a, results[i]);
+      }
+    }
+  });
+
+  if(didResultsChange) {
+    setPropInLS('results', getResults(table, newResults));
+    fetchResults();
+  }
+};
+
 function PlannerPage(props) {
   const { cooks, results, fetchTable, fetchResults } = props;
   let { table } = props;
@@ -60,8 +93,6 @@ function PlannerPage(props) {
 
     if(!areAllCooksInTable) {
       updateCooksInTable(cooks, table, fetchTable);
-      setPropInLS('results', getResults(table));
-      fetchResults();
     }    
   } else {
     const newAndDeletedCooks = cooks
@@ -88,9 +119,9 @@ function PlannerPage(props) {
     // Set table no nothing as a placeholder until localStorage updates
     table = [];
     updateCooksInTable(cooks, newTable, fetchTable);
-    setPropInLS('results', getResults(table));
-    fetchResults();
   }
+  
+  updateResultsIfCookDeletedOrEdited(cooks, results, table, fetchResults);
   
   const tableHeading = ['N/A', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
