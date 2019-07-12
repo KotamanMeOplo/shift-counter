@@ -73,7 +73,7 @@ function Calendar(props) {
         The cook on {selectedDate}
       </Modal>
 
-      <table align="center" id="calendar" className="basic-style card dark-color">
+      <table align="center" id="calendar" className="basic-style dark-color">
         <thead>
           <tr>
             { daysOfTheWeek.map((a, i) => <th key={i}>{a}</th>) }

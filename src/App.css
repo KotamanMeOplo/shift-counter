@@ -87,6 +87,11 @@ nav > button:hover, nav > button:active {
   width: 19rem;
 }
 
+#calendar {
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
 .light-color {
   background-color: #FBF9FA;
   color: #444444;
