@@ -268,7 +268,7 @@ input[type="color"] {
   text-align: center;
 }
 
-#media a{
+#media button{
   color: white;
   cursor: pointer;
 }

@@ -34,10 +34,18 @@ export default function InfoPage() {
         <p>Hi. I'm Andreas Naziris aka Kotaman and I like building solutions for problems I encounter through my life. Thank you so much for using something that I have built!!! If you are experiencing any problems with this web app please contact me.</p>
 
         <div id="media">
-          <a href="https://github.com/KotamanMeOplo"><i className="fa fa-github fa-3x" aria-hidden="true"></i></a>
-          <a href="https://www.facebook.com/kotaman.meoplo"><i className="fa fa-facebook-official fa-3x" aria-hidden="true"></i></a>
-          <a href="https://twitter.com/The_Kotaman"><i className="fa fa-twitter-square fa-3x" aria-hidden="true"></i></a>
-          <a href="mailto:AndrewNaTesla@gmail.com"><i className="fa fa-envelope fa-3x" aria-hidden="true"></i></a>
+          <a href="https://github.com/KotamanMeOplo">
+            <button><i className="fa fa-github fa-3x" aria-hidden="true"></i></button>
+          </a>
+          <a href="https://www.facebook.com/kotaman.meoplo">
+            <button><i className="fa fa-facebook-official fa-3x" aria-hidden="true"></i></button>
+          </a>
+          <a href="https://twitter.com/The_Kotaman">
+            <button><i className="fa fa-twitter-square fa-3x" aria-hidden="true"></i></button>
+          </a>
+          <a href="mailto:AndrewNaTesla@gmail.com">
+            <button><i className="fa fa-envelope fa-3x" aria-hidden="true"></i></button>
+          </a>
         </div>
       </div>
     </div>
