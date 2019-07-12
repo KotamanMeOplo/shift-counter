@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux';
-import { fetchCooks } from '../../actions/cookActions';
+import { fetchCooks, submitCook, inputingCook } from '../../actions/cookActions';
 
 function CooksPage(props) {
-  const { cooks, fetchCooks } = props;
+  const { cooks, fetchCooks, submitCook, inputingCook } = props;
 
   const [cookName, setCookName] = useState('');
   const [cookTimes, setCookTimes] = useState(0);
@@ -34,6 +34,9 @@ function CooksPage(props) {
     fetchCooks();
     setCookName('');
     setCookTimes(0);
+
+    // Redux
+    submitCook();
   }
 
   const onDeleteCook = cook => {
@@ -45,6 +48,9 @@ function CooksPage(props) {
   }
 
   const onEditCook = (cook, index) => {
+    //Redux
+    inputingCook();
+
     setCookName(cook.name);
     setCookTimes(cook.initialTimes);
     setAdditionalTimes(cook.additionalTimes);
@@ -52,6 +58,11 @@ function CooksPage(props) {
     setCookIndex(index);
 
     onDeleteCook(cook);
+  }
+  
+  // Redux
+  if(cookName !== '' || cookColor !== '#000') {
+    inputingCook();
   }
 
   return (
@@ -98,4 +109,4 @@ const mapStateToProps = state => ({
   cooks: state.cooks
 });
 
-export default connect(mapStateToProps, { fetchCooks })(CooksPage);
+export default connect(mapStateToProps, { fetchCooks, submitCook, inputingCook })(CooksPage);
