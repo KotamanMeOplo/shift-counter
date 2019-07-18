@@ -5,7 +5,6 @@ import { cancelCook } from '../actions/cookActions';
 
 function Navbar(props) {
   const onClickButton = (e) => {
-    console.log(props.inputState)
     if(props.inputState) {
       const moveOn = window.confirm('If you move to another page without submiting the cook, his information will be lost.\nMove to another page?');
 
