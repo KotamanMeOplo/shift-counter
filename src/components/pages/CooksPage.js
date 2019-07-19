@@ -2,41 +2,91 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { fetchCooks, submitCook, inputingCook } from '../../actions/cookActions';
 
+const colorToArr = color => {
+  color = color.slice(1, color.length);
+
+  const colorArr = [];
+  for(let i = 0; i < 3; i ++) {
+    colorArr.push(color.substring(i * 2, i * 2 + 2) || '00');
+  }
+
+  return colorArr;
+}
+
+const checkAndAlertForErrors = (name, times, color, cooks) => {
+  let doErrorsExist = false;
+
+  if(name === '') {
+    alert('Expected Name but got empty String');
+    doErrorsExist = true;
+  }
+
+  const doesNameAlreadyExist = cooks.filter(a => a.name === name).length !== 0;
+
+  if(doesNameAlreadyExist) {
+    alert('Name already exists. Please choose another name.');
+    doErrorsExist = true;
+  }
+
+  if(parseInt(times) < 0) {
+    alert('Times can not be a negative number');
+    doErrorsExist = true;
+  }
+
+  color = colorToArr(color);
+  const isColorDifferrentEnough = cooks.every(cook => {
+    const colorToCompare = colorToArr(cook.color);
+    const diff = color.map((a, i) => Math.abs(parseInt(a, 16) - parseInt(colorToCompare[i], 16)));
+    return diff.reduce((pr, cur) => cur + pr, 0) > 32;
+  });
+
+  if(!isColorDifferrentEnough) {
+    alert('The color is too similar to another cook\'s color');
+    doErrorsExist = true;
+  }
+
+  return doErrorsExist;
+}
+
 function CooksPage(props) {
   const { cooks, fetchCooks, submitCook, inputingCook } = props;
 
   const [cookName, setCookName] = useState('');
   const [cookTimes, setCookTimes] = useState(0);
   const [cookAdditionalTimes, setAdditionalTimes] = useState([]);
-  const [cookColor, setCookColor] = useState('#000');
+  const [cookColor, setCookColor] = useState('#000000');
   const [cookIndex, setCookIndex] = useState(null);
 
   const onSubmit = e => {
     e.preventDefault();
+    const shouldSubmit = !checkAndAlertForErrors(cookName, cookTimes, cookColor, cooks);
     
-    const newCook = {
-      name: cookName,
-      initialTimes: parseInt(cookTimes),
-      additionalTimes: cookAdditionalTimes,
-      color: cookColor
-    };
+      if(shouldSubmit) {
+      const newCook = {
+        name: cookName,
+        initialTimes: parseInt(cookTimes),
+        additionalTimes: cookAdditionalTimes,
+        color: cookColor
+      };
 
-    // Update local storage
-    const allCooks = [...cooks];
-    if(cookIndex !== null) {
-      allCooks.splice(cookIndex, 0, newCook);
-      setCookIndex(null);
-    } else {
-      allCooks.push(newCook);
+      // Update local storage
+      const allCooks = [...cooks];
+      if(cookIndex !== null) {
+        allCooks.splice(cookIndex, 0, newCook);
+        setCookIndex(null);
+      } else {
+        allCooks.push(newCook);
+      }
+      localStorage.cooks = JSON.stringify(allCooks);
+
+      fetchCooks();
+      setCookName('');
+      setCookTimes(0);
+      setCookColor('#000000');
+
+      // Redux
+      submitCook();
     }
-    localStorage.cooks = JSON.stringify(allCooks);
-
-    fetchCooks();
-    setCookName('');
-    setCookTimes(0);
-
-    // Redux
-    submitCook();
   }
 
   const onDeleteCook = cook => {
@@ -61,7 +111,7 @@ function CooksPage(props) {
   }
   
   // Redux
-  if(cookName !== '' || cookColor !== '#000') {
+  if(cookName !== '' || cookColor !== '#000000') {
     inputingCook();
   }
 
