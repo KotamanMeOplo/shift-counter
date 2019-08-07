@@ -1,4 +1,7 @@
 # Cook Manager
+
+<https://condescending-roentgen-63515f.netlify.com>
+
 ### An app to manage your unit's cooks
 
 I always tracked how many times each of my unit's cooks served as cooks so there wouldn't be any unfairness.

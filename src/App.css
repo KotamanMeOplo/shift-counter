@@ -269,6 +269,20 @@ input[type="color"] {
   text-align: center;
 }
 
+.link{
+  text-align: center;
+  color: #62BD4B;
+  display: block;
+}
+
+.link a:active {
+  color: white;
+}
+
+.link a:visited {
+  color: #62BD4B;
+}
+
 #media button{
   color: white;
   cursor: pointer;
