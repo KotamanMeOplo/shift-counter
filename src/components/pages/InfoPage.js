@@ -8,7 +8,7 @@ export default function InfoPage() {
 
       <h2 className="heading">Cook Manager</h2>
       <a href="https://condescending-roentgen-63515f.netlify.com" className="link">https://condescending-roentgen-63515f.netlify.com</a>
-      <h3 className="heading">A web app to manage how many times each of your unit's cooks serve as cooks.</h3>
+      <h3 className="heading">A web app to manage how many times each of your unit's cooks serves as a cook.</h3>
 
       <div className="basic-style card accent1-color">
         <h2>Cooks Page</h2>
